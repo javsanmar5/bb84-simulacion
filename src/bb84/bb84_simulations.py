@@ -2,7 +2,6 @@ from persons.Receiver import Receiver
 from persons.Sender import Sender
 from persons.Hacker import Hacker
 from qubits.Qubit import Qubit
-from utils.log import write_log
 
 def bb84_with_hacker(key_size: int, verbose: bool) -> None:
     a = Sender("A")
@@ -46,7 +45,7 @@ def bb84_with_hacker(key_size: int, verbose: bool) -> None:
         else:
             print("Los qubits no coinciden. La clave no es segura.")
         
-    write_log(keys_validated)
+    return keys_validated 
 
 def bb84_with_no_hacker(num_qubits: int) -> None:
     a = Sender("A")

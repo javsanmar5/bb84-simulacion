@@ -8,23 +8,23 @@
     We are gonna use the basis 'R' for rectilinear and 'D' for diagonal
 '''
 from bb84.bb84_simulations import *
-from utils.log import clear_log
 from utils.get_args import get_args
 from utils.statistics import statistics
 
 def main() -> None:
     
-    clear_log()
     num_qubits, hacker, num_iteraciones, verbose = get_args()
+    trues = 0
     
     for _ in range(num_iteraciones):
         if hacker:
-            bb84_with_hacker(num_qubits, verbose)
+            if bb84_with_hacker(num_qubits, verbose):
+                trues += 1
         else:
             bb84_with_no_hacker(num_qubits)
             
     if hacker:
-        statistics()
+        statistics(trues, num_iteraciones)
         
     return
 
