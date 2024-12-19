@@ -15,11 +15,11 @@ from utils.statistics import statistics
 def main() -> None:
     
     clear_log()
-    num_qubits, hacker, num_iteraciones = get_args()
+    num_qubits, hacker, num_iteraciones, verbose = get_args()
     
     for _ in range(num_iteraciones):
         if hacker:
-            bb84_with_hacker(num_qubits, hacker)
+            bb84_with_hacker(num_qubits, verbose)
         else:
             bb84_with_no_hacker(num_qubits)
             

@@ -7,9 +7,9 @@ def statistics() -> None:
     data = read_log()
     if data:
         ratio = _get_statistics(data)
-        print(f"Ratio of 'T': {ratio}")
+        print(f"El porcentaje de veces que se ha capturado al hacker ha sido: {ratio}")
     else:
-        print("No data to analyze.")
+        print("No hay datos que analizar.")
 
 def read_log() -> list:
     try:
@@ -17,11 +17,11 @@ def read_log() -> list:
             lines = file.readlines()
             return [line.strip() for line in lines]
     except FileNotFoundError:
-        print("Log file not found.")
+        print("No se encontró el archivo.")
         return []
 
 def _get_statistics(data: list) -> float:
     counts = Counter(data)
-    t_count = counts.get("T", 1) 
+    t_count = counts.get("F", 1) 
     
     return t_count / len(data)

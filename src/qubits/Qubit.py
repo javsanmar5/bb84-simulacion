@@ -12,7 +12,7 @@ class Qubit:
             return random.choice([0, 1])
         
     @staticmethod
-    def compare_basis(qubits1, qubits2) -> bool:
+    def compare_basis(qubits1, qubits2) -> list:
         matching_indices = []
         for i, qubit in enumerate(qubits1):
             if qubit.basis == qubits2[i].basis:

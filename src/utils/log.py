@@ -5,6 +5,8 @@ def clear_log() -> None:
         
 
 def write_log(keys_validated: bool) -> None:
+    if keys_validated == "no_computable":
+        return
     with open('logs/log.txt', 'a') as file:  
         to_write = 'T' if keys_validated else 'F'
         file.write( to_write + '\n')
