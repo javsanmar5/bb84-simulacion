@@ -1,1 +1,6 @@
 output
+
+build/
+dist/
+
+bb84_g21.spec

@@ -13,22 +13,24 @@ from utils.statistics import statistics
 
 def main() -> None:
     
-    num_qubits, hacker, num_iteraciones, verbose = get_args()
+    key_size, hacker, iterations, verbose = get_args()
     trues = 0
+    print("\n\n\nComenzando simulación de BB84...\n\n\n")
     
-    for _ in range(num_iteraciones):
+    for _ in range(iterations):
         if hacker:
-            if bb84_with_hacker(num_qubits, verbose):
+            if bb84_with_hacker(key_size, verbose):
                 trues += 1
         else:
-            bb84_with_no_hacker(num_qubits)
+            bb84_with_no_hacker(key_size)
             
     if hacker:
-        statistics(trues, num_iteraciones)
+        statistics(trues, iterations)
         
     return
 
 
     
 if __name__ == "__main__":
-   main()
+    main()
+    input("\n\n\nPulsa ENTER para salir")

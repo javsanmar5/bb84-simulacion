@@ -8,7 +8,7 @@ def bb84_with_hacker(key_size: int, verbose: bool) -> None:
     b = Receiver("B")
     c = Hacker("C")
 
-    if key_size < 1:
+    if key_size < 6:
         num_qubits = 10 * key_size
     else:
         num_qubits = 4 * key_size
@@ -47,9 +47,14 @@ def bb84_with_hacker(key_size: int, verbose: bool) -> None:
         
     return keys_validated 
 
-def bb84_with_no_hacker(num_qubits: int) -> None:
+def bb84_with_no_hacker(key_size: int) -> None:
     a = Sender("A")
     b = Receiver("B")
+
+    if key_size < 1:
+        num_qubits = 10 * key_size
+    else:
+        num_qubits = 4 * key_size
 
     a.generate_qubits(num_qubits)
     b.measure_qubits(a.qubits)
@@ -67,20 +72,23 @@ def bb84_with_no_hacker(num_qubits: int) -> None:
     a.update_qubits(matching_indices)
     b.update_qubits(matching_indices)
     
+    a.qubits = a.qubits[:key_size]
+    b.qubits = b.qubits[:key_size]
+    
     print("Los resultados de la comparacion son los siguientes:")
     print(f"A: {a}")    
     print(f"B: {b}")   
     input()
 
-    if _validate_keys(a.qubits, b.qubits, num_qubits):
+    if _validate_keys(a, b, num_qubits):
         print("Los qubits coinciden. La clave es segura")
     else:
         print("Los qubits no coinciden. La clave no es segura.")
   
-def _validate_keys(a, b, key_size) -> bool:
+def _validate_keys(a, b, key_size: int) -> bool:
     for i in range(len(a.qubits)):
         if i == key_size:
             break
         if a.qubits[i].bit != b.qubits[i].bit:
-            return True
-    return False
+            return False
+    return True
